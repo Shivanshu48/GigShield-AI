@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GigShield AI — Parametric Insurance for Gig Workers</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+</head>
+<body data-page="auth">
+<div class="page-wrapper">
+<div class="auth-container">
+<div class="auth-box" id="auth-box">
+
+  <!-- Logo -->
+  <div class="auth-logo">
+    <div class="logo-mark">🛡️</div>
+    <div class="logo-text">
+      <span class="logo-name">GigShield AI</span>
+      <span class="logo-tagline">Parametric · Zero-Touch</span>
+    </div>
+  </div>
+
+  <!-- Tabs (hidden on reset page) -->
+  <div class="auth-tabs" id="auth-tabs">
+    <button class="tab-btn active" data-tab="login">Sign In</button>
+    <button class="tab-btn" data-tab="register">Register</button>
+  </div>
+
+  <!-- ══════════════════ LOGIN PANEL ══════════════════ -->
+  <div id="panel-login" class="auth-panel">
+    <h2 class="auth-title">Welcome back</h2>
+    <p class="auth-subtitle">// Sign in with email &amp; password, or OTP</p>
+
+    <!-- Login method toggle -->
+    <div class="method-toggle" id="login-method-toggle">
+      <button class="method-btn active" data-method="password">🔑 Password</button>
+      <button class="method-btn" data-method="otp">📱 OTP</button>
+    </div>
+
+    <!-- Password form -->
+    <form id="login-form" novalidate>
+      <div id="login-password-fields">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email Address</label>
+          <input id="login-email" class="form-input" type="email"
+            placeholder="rahul@example.com" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <div class="input-wrap">
+            <input id="login-password" class="form-input" type="password"
+              placeholder="••••••••" autocomplete="current-password" />
+            <button type="button" class="eye-btn" data-target="login-password">👁</button>
+          </div>
+        </div>
+        <div class="form-footer-row">
+          <a href="#" class="forgot-link" id="forgot-link">Forgot password?</a>
+        </div>
+        <button id="login-btn" class="btn-primary" type="submit">Access Dashboard →</button>
+      </div>
+    </form>
+
+    <!-- OTP fields (shown when OTP method selected) -->
+    <div id="login-otp-fields" style="display:none">
+      <div class="form-group">
+        <label class="form-label" for="otp-email">Registered Email</label>
+        <input id="otp-email" class="form-input" type="email" placeholder="rahul@example.com" />
+      </div>
+      <div id="otp-send-wrap">
+        <button id="btn-send-otp" class="btn-primary" type="button">Send OTP →</button>
+      </div>
+      <div id="otp-verify-wrap" style="display:none">
+        <p class="otp-hint">
+          // 6-digit code sent to <strong id="otp-sent-to"></strong><br>
+          <em style="color:var(--neon-green); font-style:normal">Check your console / alert for demo OTP</em>
+        </p>
+        <div class="otp-inputs" id="otp-boxes">
+          <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+          <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+          <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+          <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+          <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+          <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+        </div>
+        <div class="otp-timer-row">
+          <span class="otp-timer">Expires in <span id="otp-countdown">120</span>s</span>
+          <button id="btn-resend-otp" class="resend-btn" type="button" disabled>Resend</button>
+        </div>
+        <button id="btn-verify-otp" class="btn-primary" type="button">Verify &amp; Login →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ REGISTER PANEL ══════════════════ -->
+  <div id="panel-register" class="auth-panel" style="display:none">
+    <h2 class="auth-title">Create account</h2>
+    <p class="auth-subtitle">// Step <span id="reg-step-label">1</span> of 3</p>
+
+    <!-- Step progress bar -->
+    <div class="step-progress">
+      <div class="step-track">
+        <div class="step-dot active" id="sdot-1">1</div>
+        <div class="step-line" id="sline-1"></div>
+        <div class="step-dot" id="sdot-2">2</div>
+        <div class="step-line" id="sline-2"></div>
+        <div class="step-dot" id="sdot-3">3</div>
+      </div>
+      <div class="step-labels">
+        <span>Personal</span><span>Platform</span><span>Security</span>
+      </div>
+    </div>
+
+    <form id="register-form" novalidate>
+
+      <!-- ─── STEP 1 ─── -->
+      <div id="reg-step-1" class="reg-step">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="reg-name">Full Name</label>
+            <input id="reg-name" class="form-input" type="text"
+              placeholder="Rahul Kumar" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-age">Age</label>
+            <input id="reg-age" class="form-input" type="number"
+              placeholder="24" min="18" max="65" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Email Address</label>
+          <input id="reg-email" class="form-input" type="email"
+            placeholder="rahul@example.com" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-phone">Phone Number</label>
+          <div class="input-wrap">
+            <span class="input-prefix">+91</span>
+            <input id="reg-phone" class="form-input prefix-pad" type="tel"
+              placeholder="9876543210" maxlength="10" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-location">City / Delivery Zone</label>
+          <input id="reg-location" class="form-input" type="text"
+            placeholder="Mumbai, Andheri West" />
+        </div>
+        <button type="button" class="btn-primary" id="reg-next-1">
+          Next: Platform Info →
+        </button>
+      </div>
+
+      <!-- ─── STEP 2 ─── -->
+      <div id="reg-step-2" class="reg-step" style="display:none">
+        <div class="form-group">
+          <label class="form-label" for="reg-platform">Delivery Platform</label>
+          <div class="select-wrap">
+            <select id="reg-platform" class="form-input form-select">
+              <option value="" disabled selected>Select platform…</option>
+              <option value="Zomato">🍕 Zomato</option>
+              <option value="Swiggy">🛵 Swiggy</option>
+              <option value="Blinkit">⚡ Blinkit</option>
+              <option value="Zepto">🟣 Zepto</option>
+              <option value="Dunzo">📦 Dunzo</option>
+              <option value="Amazon Flex">📦 Amazon Flex</option>
+              <option value="Other">🔄 Other</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-platform-id">Platform Worker ID</label>
+          <input id="reg-platform-id" class="form-input" type="text"
+            placeholder="ZOM-2024-XXXXXXX" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-id-type">ID Proof Type</label>
+          <div class="select-wrap">
+            <select id="reg-id-type" class="form-input form-select">
+              <option value="" disabled selected>Select document…</option>
+              <option value="Aadhaar">🪪 Aadhaar Card</option>
+              <option value="PAN">💳 PAN Card</option>
+              <option value="Driving Licence">🚗 Driving Licence</option>
+              <option value="Voter ID">🗳️ Voter ID</option>
+              <option value="Passport">📗 Passport</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-id-number">ID Document Number</label>
+          <input id="reg-id-number" class="form-input" type="text"
+            placeholder="XXXX XXXX XXXX" />
+        </div>
+        <div class="btn-row-2">
+          <button type="button" class="btn-secondary" id="reg-back-2">← Back</button>
+          <button type="button" class="btn-primary btn-flex" id="reg-next-2">
+            Next: Security →
+          </button>
+        </div>
+      </div>
+
+      <!-- ─── STEP 3 ─── -->
+      <div id="reg-step-3" class="reg-step" style="display:none">
+        <div class="form-group">
+          <label class="form-label" for="reg-password">Create Password</label>
+          <div class="input-wrap">
+            <input id="reg-password" class="form-input" type="password"
+              placeholder="Min 8 characters" />
+            <button type="button" class="eye-btn" data-target="reg-password">👁</button>
+          </div>
+          <div class="password-strength">
+            <div class="strength-bar">
+              <div class="strength-fill" id="strength-fill"></div>
+            </div>
+            <span id="strength-label" class="strength-text"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-confirm-password">Confirm Password</label>
+          <div class="input-wrap">
+            <input id="reg-confirm-password" class="form-input" type="password"
+              placeholder="Repeat password" />
+            <button type="button" class="eye-btn" data-target="reg-confirm-password">👁</button>
+          </div>
+        </div>
+        <div class="consent-row">
+          <input id="reg-consent" type="checkbox" class="check-input" />
+          <label for="reg-consent" class="check-label">
+            I agree to the
+            <a href="#" class="inline-link">Terms of Service</a> and
+            <a href="#" class="inline-link">Privacy Policy</a>
+          </label>
+        </div>
+        <div class="btn-row-2">
+          <button type="button" class="btn-secondary" id="reg-back-3">← Back</button>
+          <button type="submit" class="btn-primary btn-flex" id="reg-btn">
+            Create Account →
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- ══════════════════ RESET PASSWORD PANEL ══════════════════ -->
+  <div id="panel-reset" class="auth-panel" style="display:none">
+    <h2 class="auth-title">Reset password</h2>
+    <p class="auth-subtitle">// We'll send a 6-digit code to your email</p>
+
+    <!-- Stage 1 -->
+    <div id="reset-stage-1">
+      <div class="form-group">
+        <label class="form-label" for="reset-email">Registered Email</label>
+        <input id="reset-email" class="form-input" type="email"
+          placeholder="rahul@example.com" />
+      </div>
+      <button id="btn-reset-send" class="btn-primary" type="button">
+        Send Reset Code →
+      </button>
+      <div style="margin-top:18px; text-align:center">
+        <a href="#" class="forgot-link" id="back-to-login">← Back to Sign In</a>
+      </div>
+    </div>
+
+    <!-- Stage 2 -->
+    <div id="reset-stage-2" style="display:none">
+      <p class="otp-hint">
+        // Code sent to <strong id="reset-sent-to"></strong><br>
+        <em style="color:var(--neon-green); font-style:normal">Demo: check console/alert for code</em>
+      </p>
+      <div class="otp-inputs" id="reset-otp-boxes">
+        <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+        <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+        <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+        <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+        <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+        <input class="otp-box" maxlength="1" type="text" inputmode="numeric" />
+      </div>
+      <div class="form-group" style="margin-top:18px">
+        <label class="form-label" for="reset-new-pw">New Password</label>
+        <div class="input-wrap">
+          <input id="reset-new-pw" class="form-input" type="password"
+            placeholder="Min 8 characters" />
+          <button type="button" class="eye-btn" data-target="reset-new-pw">👁</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="reset-confirm-pw">Confirm New Password</label>
+        <div class="input-wrap">
+          <input id="reset-confirm-pw" class="form-input" type="password"
+            placeholder="Repeat password" />
+          <button type="button" class="eye-btn" data-target="reset-confirm-pw">👁</button>
+        </div>
+      </div>
+      <button id="btn-reset-confirm" class="btn-primary" type="button">
+        Update Password →
+      </button>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  <div id="auth-error"   class="error-msg"></div>
+  <div id="auth-success" class="success-msg"></div>
+
+</div>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

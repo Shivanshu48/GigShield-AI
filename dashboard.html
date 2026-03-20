@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GigShield AI — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+</head>
+<body data-page="dashboard">
+<div class="page-wrapper">
+<div class="dashboard">
+
+  <!-- ─── HEADER ──────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-left">
+      <div class="header-logo">
+        <div class="logo-mark">🛡️</div>
+        <div class="logo-text">
+          <span class="logo-name">GigShield AI</span>
+          <span class="logo-tagline">Parametric · Zero-Touch</span>
+        </div>
+      </div>
+      <div class="status-pill">
+        <span class="pulse-dot"></span>
+        Policy Active
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="user-chip">
+        <div class="user-avatar user-avatar-initial">R</div>
+        <span class="user-display-name user-name-chip">Loading…</span>
+      </div>
+      <button id="btn-logout" class="btn-logout">↩ Logout</button>
+    </div>
+  </header>
+
+  <!-- ─── MAIN GRID ────────────────────────────────────────── -->
+  <main class="main-grid">
+
+    <!-- ══ LEFT ══ -->
+    <div class="col-left">
+
+      <!-- Profile Card -->
+      <div id="profile-card" class="card profile-card">
+        <div class="profile-avatar user-avatar-initial">R</div>
+        <div class="profile-name user-display-name">—</div>
+        <div class="profile-id" id="profile-userid">GS-XXXXXXX</div>
+
+        <div class="profile-meta-grid">
+          <div class="profile-meta-item">
+            <span class="meta-icon">📍</span>
+            <div>
+              <div class="meta-label">Location</div>
+              <div class="meta-value" id="profile-location">—</div>
+            </div>
+          </div>
+          <div class="profile-meta-item">
+            <span class="meta-icon">📱</span>
+            <div>
+              <div class="meta-label">Phone</div>
+              <div class="meta-value" id="profile-phone">—</div>
+            </div>
+          </div>
+          <div class="profile-meta-item">
+            <span class="meta-icon">✉️</span>
+            <div>
+              <div class="meta-label">Email</div>
+              <div class="meta-value" id="profile-email">—</div>
+            </div>
+          </div>
+          <div class="profile-meta-item">
+            <span class="meta-icon">🎂</span>
+            <div>
+              <div class="meta-label">Age</div>
+              <div class="meta-value" id="profile-age">—</div>
+            </div>
+          </div>
+          <div class="profile-meta-item">
+            <span class="meta-icon">🛵</span>
+            <div>
+              <div class="meta-label">Platform</div>
+              <div class="meta-value" id="profile-platform">—</div>
+            </div>
+          </div>
+          <div class="profile-meta-item">
+            <span class="meta-icon">🪪</span>
+            <div>
+              <div class="meta-label">ID Proof</div>
+              <div class="meta-value" id="profile-idtype">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risk Card -->
+      <div id="risk-card" class="card">
+        <div class="card-header">
+          <span class="card-title">AI Risk Score</span>
+          <span class="card-badge badge-orange">LIVE ENGINE</span>
+        </div>
+        <div id="val-risk" class="stat-value muted">--</div>
+        <div class="stat-label">Current Risk Level</div>
+        <div class="risk-meter">
+          <div class="risk-track">
+            <div id="risk-fill" class="risk-fill"></div>
+          </div>
+          <div class="risk-labels">
+            <span>Low</span><span>Medium</span><span>High</span>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-item">
+            <div id="val-premium" class="stat-value muted" style="font-size:26px">--</div>
+            <div class="stat-label">Weekly Premium</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" style="font-size:26px">
+              <span id="weather-temp" style="color:var(--blue-accent)">--</span>
+              <span style="font-size:14px; color:var(--text-muted)"> °C</span>
+            </div>
+            <div class="stat-label">Temperature</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payout Card -->
+      <div id="payout-card" class="card payout-card">
+        <div class="card-header">
+          <span class="card-title">Total Payouts</span>
+          <span class="card-badge badge-green">AUTO-CREDIT</span>
+        </div>
+        <div id="val-payout" class="stat-value muted">₹0</div>
+        <div class="stat-label">Credited to UPI Wallet</div>
+        <div id="payout-list" class="payout-history"></div>
+      </div>
+
+    </div>
+
+    <!-- ══ RIGHT ══ -->
+    <div class="col-right">
+
+      <!-- Action Buttons -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Policy Controls</span>
+          <span class="card-badge badge-blue">ZERO-TOUCH</span>
+        </div>
+        <div class="action-grid">
+          <button id="btn-risk" class="action-btn green-action">
+            <span class="action-btn-icon">🧠</span>Check Risk
+          </button>
+          <button id="btn-weather" class="action-btn blue-action">
+            <span class="action-btn-icon">🌡️</span>Check Weather
+          </button>
+          <button id="btn-rain" class="action-btn orange-action">
+            <span class="action-btn-icon">🌧️</span>Simulate Rain
+          </button>
+          <button class="action-btn" onclick="document.getElementById('btn-logout').click()">
+            <span class="action-btn-icon">↩</span>Sign Out
+          </button>
+        </div>
+      </div>
+
+      <!-- Weather Card -->
+      <div id="weather-card" class="card">
+        <div class="card-header">
+          <span class="card-title">Weather Monitor</span>
+          <span id="weather-status" class="card-badge badge-blue">STANDBY</span>
+        </div>
+        <div class="weather-display">
+          <div class="weather-temp-big">
+            <span id="weather-temp-big">--</span><span>°C</span>
+          </div>
+          <div class="weather-info">
+            <div class="weather-label">Location</div>
+            <div class="weather-status-text" id="weather-city">—</div>
+          </div>
+        </div>
+        <div id="heat-alert" class="heat-alert" style="display:none; align-items:center; gap:10px">
+          <span>🔥</span>
+          <div>
+            <strong>Heat Risk Detected</strong><br>
+            Extreme temperature — ₹150 auto-credited.
+          </div>
+        </div>
+      </div>
+
+      <!-- Fraud Detection -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Fraud Detection</span>
+          <span class="card-badge badge-green">ALL CLEAR</span>
+        </div>
+        <div class="fraud-checks">
+          <div class="fraud-check-item">
+            <div class="check-icon">📍</div>
+            <div class="check-text">GPS Location Verified</div>
+            <div class="check-verified">✓ CONFIRMED</div>
+          </div>
+          <div class="fraud-check-item">
+            <div class="check-icon">🔍</div>
+            <div class="check-text">No Fraud Patterns Detected</div>
+            <div class="check-verified">✓ CLEAN</div>
+          </div>
+          <div class="fraud-check-item">
+            <div class="check-icon">🪪</div>
+            <div class="check-text">Identity Confirmed</div>
+            <div class="check-verified">✓ VERIFIED</div>
+          </div>
+          <div class="fraud-check-item">
+            <div class="check-icon">⚡</div>
+            <div class="check-text">Parametric Triggers Active</div>
+            <div class="check-verified">✓ LIVE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Feed -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">System Activity</span>
+          <span class="card-badge badge-blue">REALTIME</span>
+        </div>
+        <div id="activity-feed" class="activity-feed">
+          <div class="empty-state">// no activity yet — trigger an action above</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+</div>
+
+<!-- ─── RAIN MODAL ─────────────────────────────────────────── -->
+<div id="modal-overlay" class="modal-overlay">
+  <div class="modal-box">
+    <span id="modal-emoji" class="modal-emoji">🌧️</span>
+    <h2 id="modal-title" class="modal-title">Heavy Rain Detected</h2>
+    <p id="modal-sub" class="modal-sub">
+      ⚡ Claim Triggered Automatically<br>Zero action needed from you
+    </p>
+    <div id="modal-amount" class="modal-amount">₹200</div>
+    <button id="modal-close-btn" class="modal-close">Confirm &amp; Close</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // Sync big temp display
+  const _tempSmall = document.getElementById('weather-temp');
+  const _tempBig   = document.getElementById('weather-temp-big');
+  if (_tempSmall && _tempBig) {
+    new MutationObserver(() => {
+      const t = _tempSmall.textContent;
+      if (t && t !== '--') _tempBig.textContent = t;
+    }).observe(_tempSmall, { childList: true, characterData: true, subtree: true });
+  }
+</script>
+</body>
+</html>
