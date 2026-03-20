@@ -125,8 +125,8 @@ Current version simulates AI logic with a clear path for future upgrades.
 
 | Layer    | Technology                                      |
 | -------- | ----------------------------------------------- |
-| Frontend | HTML, CSS, JavaScript                           |
-| Storage  | LocalStorage                                    |
+| Frontend | HTML, CSS, JavaScript, React                    |
+| Storage  | LocalStorage / Cloud Storage                    |
 | APIs     | OpenWeather API (Real-time weather integration) |
 | Design   | Modern UI (Fintech-inspired)                    |
 
