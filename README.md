@@ -227,13 +227,13 @@ This shifts insurance from reactive to **proactive protection**.
 
 ## 👥 Team & Responsibilities
 
-* **Frontend & UX: **
+* **Frontend & UX** : 
   Built a responsive dashboard with a clean, modern interface focused on usability
 
-* **Application Logic: **
+* **Application Logic** : 
   Developed authentication, dynamic pricing, and complete workflow
 
-* **Integration & Automation: **
+* **Integration & Automation** : 
   Integrated OpenWeather API, implemented trigger system, and automated payout simulation
 
 ---
